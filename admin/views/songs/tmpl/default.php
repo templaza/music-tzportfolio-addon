@@ -22,20 +22,40 @@
 // No direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\HTML\HTMLHelper;
+
 JHtml::addIncludePath(COM_TZ_PORTFOLIO_PLUS_ADMIN_HELPERS_PATH.DIRECTORY_SEPARATOR.'html');
 
 $user		= JFactory::getUser();
 
 $listOrder	= $this->escape($this->state->get('list.ordering'));
 $listDirn	= $this->escape($this->state->get('list.direction'));
-$saveOrder	= $listOrder == 'ordering';
+$saveOrder	= $listOrder == 'd.ordering';
 $addonId    = $this -> state -> get($this -> getName().'.addon_id');
+$j4Compare  = COM_TZ_PORTFOLIO_PLUS_JVERSION_4_COMPARE;
+
+if(!$j4Compare) {
+    JHtml::_('behavior.multiselect');
+    JHtml::_('bootstrap.tooltip');
+    JHtml::_('dropdown.init');
+    JHtml::_('formbehavior.chosen', 'select');
+}else{
+    $wa = $this->document->getWebAssetManager();
+    $wa->useScript('table.columns')
+        ->useScript('multiselect');
+    HTMLHelper::_('formbehavior.chosen', 'select');
+//    JHtml::_('formbehavior.chosen', 'select[multiple]');
+}
 
 if ($saveOrder)
 {
     $saveOrderingUrl = TZ_Portfolio_PlusHelperAddon_Datas::getRootURL($addonId)
         .'&addon_task=songs.saveOrderAjax&tmpl=component';
-    JHtml::_('tzsortablelist.sortable', 'addonDataList', 'adminForm', strtolower($listDirn), $saveOrderingUrl);
+    if($j4Compare){
+        HTMLHelper::_('draggablelist.draggable', 'addonDataList', '', strtolower($listDirn), $saveOrderingUrl);
+    }else {
+        JHtml::_('tzsortablelist.sortable', 'addonDataList', 'adminForm', strtolower($listDirn), $saveOrderingUrl);
+    }
 }
 ?>
 <form action="<?php echo JRoute::_(TZ_Portfolio_PlusHelperAddon_Datas::getRootURL($addonId)); ?>"
@@ -61,41 +81,44 @@ if ($saveOrder)
                     <?php echo JText::_('JGLOBAL_NO_MATCHING_RESULTS'); ?>
                 </div>
             <?php }else{ ?>
-                <table class="table table-striped"  id="addonDataList">
+                <table class="table table-striped itemList" id="addonDataList">
                     <thead>
                     <tr>
                         <th width="1%" class="nowrap center">
-                            <?php echo JHtml::_('grid.sort', '<span class="icon-menu-2"></span>', 'd.ordering', $listDirn, $listOrder, null, 'asc', 'JGRID_HEADING_ORDERING'); ?>
+                            <?php echo JHtml::_('searchtools.sort', '', 'd.ordering', $listDirn, $listOrder, null, 'asc', 'JGRID_HEADING_ORDERING', 'icon-menu-2'); ?>
                         </th>
                         <th width="1%" class="hidden-phone">
                             <?php echo JHtml::_('grid.checkall'); ?>
                         </th>
                         <th width="1%" style="min-width:55px" class="nowrap center">
-                            <?php echo JHtml::_('grid.sort', 'JSTATUS', 'd.published', $listDirn, $listOrder); ?>
+                            <?php echo JHtml::_('searchtools.sort', 'JSTATUS', 'd.published', $listDirn, $listOrder); ?>
                         </th>
                         <th class="nowrap">
-                            <?php echo JHtml::_('grid.sort','JGLOBAL_TITLE','value.title',$listDirn,$listOrder);?>
+                            <?php echo JHtml::_('searchtools.sort','JGLOBAL_TITLE','value.title',$listDirn,$listOrder);?>
                         </th>
                         <th class="nowrap" width="20%">
                             <?php echo JText::_('PLG_CONTENT_MUSIC_ALBUM');?>
                         </th>
                         <th class="nowrap" width="1%">
-                            <?php echo JHtml::_('grid.sort','JGRID_HEADING_ID','d.id',$listDirn,$listOrder);?>
+                            <?php echo JHtml::_('searchtools.sort','JGRID_HEADING_ID','d.id',$listDirn,$listOrder);?>
                         </th>
                     </tr>
                     </thead>
                     <?php if($items = $this -> items):?>
-                        <tbody>
+                        <tbody <?php if ($saveOrder) :?> class="js-draggable" data-url="<?php echo $saveOrderingUrl;
+                        ?>" data-direction="<?php echo strtolower($listDirn); ?>" data-nested="true"<?php endif; ?>>
                         <?php foreach($items as $i => $data):
                             $canCreate  = $user->authorise('core.create',     'com_tz_portfolio_plus');
                             $canEdit    = $user->authorise('core.edit',       'com_tz_portfolio_plus');
                             $canEditOwn = $user->authorise('core.edit.own',   'com_tz_portfolio_plus');
                             $item   = $data -> value;
                             ?>
-                            <tr class="row<?php echo $i % 2; ?>" sortable-group-id="<?php echo $data -> extension_id;?>">
+                            <tr class="row<?php echo $i % 2; ?>" data-draggable-group="<?php
+                            echo $data -> extension_id;?>" data-transitions="">
                                 <td class="order nowrap center hidden-phone">
                                     <?php
-                                    $canChange = $user->authorise('core.edit.state', 'com_tz_portfolio_plus.addons');
+                                    $canChange = $user->authorise('core.edit.state', 'com_tz_portfolio_plus.addons')
+                                        || $user->authorise('core.edit.state.own', 'com_tz_portfolio_plus.addons');
                                     $iconClass = '';
                                     if (!$canChange)
                                     {
@@ -103,12 +126,12 @@ if ($saveOrder)
                                     }
                                     elseif (!$saveOrder)
                                     {
-                                        $iconClass = ' inactive tip-top hasTooltip" title="' . JHtml::tooltipText('JORDERINGDISABLED');
+                                        $iconClass = ' inactive tip-top hasTooltip" title="' . JHtml::_('tooltipText', 'JORDERINGDISABLED');
                                     }
                                     ?>
                                     <span class="sortable-handler<?php echo $iconClass ?>">
-                        <span class="icon-menu"></span>
-                    </span>
+                                        <span class="icon-menu"></span>
+                                    </span>
                                     <?php if ($canChange && $saveOrder) : ?>
                                         <input type="text" style="display:none" name="order[]" size="5"
                                                value="<?php echo $data->ordering;?>" class="width-20 text-area-order " />
@@ -118,9 +141,7 @@ if ($saveOrder)
                                     <?php echo JHtml::_('grid.id', $i, $data->id, false, 'cid'); ?>
                                 </td>
                                 <td class="center">
-                                    <div class="btn-group">
-                                        <?php echo JHtml::_('jgrid.published', $data->published, $i, 'songs.', true, 'cb'); ?>
-                                    </div>
+                                    <?php echo JHtml::_('jgrid.published', $data->published, $i, 'songs.', true, 'cb'); ?>
                                 </td>
                                 <td>
                                     <?php if ($canEdit || $canEditOwn) : ?>
