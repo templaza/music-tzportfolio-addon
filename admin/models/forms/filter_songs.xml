@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="filter" addfieldpath="/administrator/components/com_tz_portfolio_plus/models/fields">
+		<field type="text" name="search"
+			   hint="JSEARCH_FILTER"
+			   label="COM_TZ_PORTFOLIO_PLUS_FILTER_SEARCH_LABEL"
+			   description="COM_TZ_PORTFOLIO_PLUS_FILTER_SEARCH_DESC"/>
+
+		<field type="status" name="published"
+			   filter="0,1,-2,*"
+			   onchange="this.form.submit();"
+			   label="JSTATUS"
+			   description="COM_CONTENT_FILTER_PUBLISHED_DESC">
+			<option value="">JOPTION_SELECT_PUBLISHED</option>
+		</field>
+		<input type="hidden" name="form_submited" value="1"/>
+	</fields>
+
+	<fields name="list">
+		<field type="list" name="fullordering"
+			   default="d.id DESC"
+			   onchange="this.form.submit();"
+			   label="COM_CONTENT_LIST_FULL_ORDERING"
+			   description="COM_CONTENT_LIST_FULL_ORDERING_DESC">
+			<option value="">JGLOBAL_SORT_BY</option>
+			<option value="d.ordering ASC">JGRID_HEADING_ORDERING_ASC</option>
+			<option value="d.ordering DESC">JGRID_HEADING_ORDERING_DESC</option>
+			<option value="d.published ASC">JSTATUS_ASC</option>
+			<option value="d.published DESC">JSTATUS_DESC</option>
+			<option value="value.title ASC">JGLOBAL_TITLE_ASC</option>
+			<option value="value.title DESC">JGLOBAL_TITLE_DESC</option>
+			<option value="d.id ASC">JGRID_HEADING_ID_ASC</option>
+			<option value="d.id DESC">JGRID_HEADING_ID_DESC</option>
+		</field>
+
+		<field type="limitbox" name="limit"
+			   default="25" class="input-mini"
+			   onchange="this.form.submit();"
+			   label="COM_CONTENT_LIST_LIMIT"
+			   description="COM_CONTENT_LIST_LIMIT_DESC"/>
+	</fields>
+</form>

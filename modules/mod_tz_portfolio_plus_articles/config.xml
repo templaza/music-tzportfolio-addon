@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fields name="params">
+        <fieldset name="basic">
+            <field type="spacer" name="spacer_music_addon_name"
+                   class="alert alert-warning btn-block"
+                   label="PLG_CONTENT_MUSIC_TITLE"/>
+            <field type="list" name="music_order"
+                   default="rdate"
+                   label="PLG_CONTENT_MUSIC_ORDER_LABEL">
+                <option value="rdate">PLG_CONTENT_MUSIC_RECENT_FIRST</option>
+                <option value="date">PLG_CONTENT_MUSIC_OLDEST_FIRST</option>
+                <option value="alpha">PLG_CONTENT_MUSIC_TITLE_ALPHABETICAL</option>
+                <option value="ralpha">PLG_CONTENT_MUSIC_TITLE_REVERSE_ALPHABETICAL</option>
+                <option value="order">JFIELD_ORDERING_LABEL</option>
+            </field>
+        </fieldset>        ​
+    </fields>
+</form>

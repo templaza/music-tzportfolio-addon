@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <!-- Form's field for article's create or edit view -->
+    <fields name="addon">
+        <fields name="music">
+            <fieldset addfieldpath="/administrator/components/com_tz_portfolio_plus/models/fields" name="basic">
+                <field type="modal_song" name="songs"
+                       class="form-control"
+                       new="true" edit="true"
+                       multiple="true"
+                       label="PLG_CONTENT_MUSIC_SONGS"/>
+            </fieldset>
+        </fields>
+    </fields>
+    <!-- End form's field for article's create or edit view -->
+</form>

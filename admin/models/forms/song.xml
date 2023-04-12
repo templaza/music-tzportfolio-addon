@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fieldset addfieldpath="/administrator/components/com_tz_portfolio_plus/models/fields" >
+        <field type="text" name="id"
+               default="0" readonly="true" class="readonly"
+               label="JGLOBAL_FIELD_ID_LABEL"
+               description ="JGLOBAL_FIELD_ID_DESC" />
+        <field type="list" name="published"
+               class="chzn-color-state" size="1" default="1"
+               label="JSTATUS"
+               description="JFIELD_PUBLISHED_DESC">
+            <option value="1">JPUBLISHED</option>
+            <option value="0">JUNPUBLISHED</option>
+            <option value="-2">JTRASHED</option>
+        </field>
+    </fieldset>
+    <fields name="value">
+        <field type="text" name="title"
+               required="true"
+               label="JGLOBAL_TITLE"
+               description="JFIELD_TITLE_DESC"/>
+        <field type="text" name="alias"
+               label="JFIELD_ALIAS_LABEL"
+               description="JFIELD_ALIAS_DESC"/>
+        <field type="media" name="thumbnail"
+               label="PLG_CONTENT_MUSIC_THUMBNAIL_LABEL"
+               description="PLG_CONTENT_MUSIC_THUMBNAIL_DESC"/>
+        <field type="file" name="file"
+               multiple="true"
+               label="PLG_CONTENT_MUSIC_FILES_LABEL"
+               description="PLG_CONTENT_MUSIC_FILES_DESC"/>
+        <field type="hidden" name="file_names"/>
+        <field type="modal_article" name="contentid"
+               multiple="true"
+               edit = "true" required="true"
+               label="PLG_CONTENT_MUSIC_ALBUM_LABEL"/>
+        <field type="editor" name="description"
+               filter="JComponentHelper::filterText"
+               label="JGLOBAL_DESCRIPTION"
+               description="JGLOBAL_DESCRIPTION">
+        <field type="tzcheckbox" name="remove" multiple="true"
+               label="JTOOLBAR_REMOVE"/>
+        </field>
+    </fields>
+</form>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fields name="params">
+        <!-- Start article options in category listings -->
+        <fieldset name="article_category_listing">
+            <field type="spacer" name="spacer_music_hr" hr="true"/>
+            <field type="spacer" name="spacer_music_name"
+                   class="alert alert-warning btn-block"
+                   label="PLG_CONTENT_MUSIC_OPTIONS_LABEL"/>
+            <field type="list" name="music_show_cat_countsong"
+                   label="PLG_CONTENT_MUSIC_SHOW_COUNT_SONG_LABEL">
+                <option value="">JGLOBAL_USE_GLOBAL</option>
+                <option value="0">JHIDE</option>
+                <option value="1">JSHOW</option>
+            </field>
+        </fieldset>
+        <!-- End article options in category listings -->
+        <fieldset name="article">
+            <field type="spacer" name="spacer_music_hr" hr="true"/>
+            <field type="spacer" name="spacer_music_name"
+                   class="alert alert-warning btn-block"
+                   label="PLG_CONTENT_MUSIC_OPTIONS_LABEL"/>
+            <field type="radio" name="music_show_article"
+                   default="1" class="btn-group"
+                   label="PLG_CONTENT_MUSIC_SHOW_IN_ARTICLE">
+                <option value="0">JHIDE</option>
+                <option value="1">JSHOW</option>
+            </field>
+            <field type="list" name="music_auto_play"
+                   label="PLG_CONTENT_MUSIC_AUTO_PLAY_LABEL">
+                <option value="">JGLOBAL_USE_GLOBAL</option>
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+            <field type="list" name="music_show_repeat"
+                   label="PLG_CONTENT_MUSIC_SHOW_REPEAT_LABEL">
+                <option value="">JGLOBAL_USE_GLOBAL</option>
+                <option value="0">JHIDE</option>
+                <option value="1">JSHOW</option>
+            </field>
+            <field type="list" name="music_show_shuffle"
+                   label="PLG_CONTENT_MUSIC_SHOW_SHUFFLE_LABEL">
+                <option value="">JGLOBAL_USE_GLOBAL</option>
+                <option value="0">JHIDE</option>
+                <option value="1">JSHOW</option>
+            </field>
+            <field type="list" name="music_show_fullscreen"
+                   label="PLG_CONTENT_MUSIC_SHOW_FULL_SCREEN_LABEL">
+                <option value="">JGLOBAL_USE_GLOBAL</option>
+                <option value="0">JHIDE</option>
+                <option value="1">JSHOW</option>
+            </field>
+            <field type="list" name="music_show_stop_btn"
+                   label="PLG_CONTENT_MUSIC_SHOW_FULL_STOP_BUTTON_LABEL">
+                <option value="">JGLOBAL_USE_GLOBAL</option>
+                <option value="0">JHIDE</option>
+                <option value="1">JSHOW</option>
+            </field>
+            <field type="text" name="music_volume"
+                   label="PLG_CONTENT_MUSIC_VOLUME_LABEL"
+                   description="PLG_CONTENT_MUSIC_VOLUME_DESC"/>
+            <field type="list" name="music_show_title"
+                   label="JGLOBAL_SHOW_TITLE_LABEL">
+                <option value="">JGLOBAL_USE_GLOBAL</option>
+                <option value="0">JHIDE</option>
+                <option value="1">JSHOW</option>
+            </field>
+            <field type="list" name="music_show_description"
+                   label="PLG_CONTENT_MUSIC_SHOW_DESCRIPTION_LABEL">
+                <option value="">JGLOBAL_USE_GLOBAL</option>
+                <option value="0">JHIDE</option>
+                <option value="1">JSHOW</option>
+            </field>
+            <field type="list" name="music_order"
+                   label="PLG_CONTENT_MUSIC_ORDER_LABEL">
+                <option value="">JGLOBAL_USE_GLOBAL</option>
+                <option value="rdate">PLG_CONTENT_MUSIC_RECENT_FIRST</option>
+                <option value="date">PLG_CONTENT_MUSIC_OLDEST_FIRST</option>
+                <option value="alpha">PLG_CONTENT_MUSIC_TITLE_ALPHABETICAL</option>
+                <option value="ralpha">PLG_CONTENT_MUSIC_TITLE_REVERSE_ALPHABETICAL</option>
+                <option value="order">JFIELD_ORDERING_LABEL</option>
+            </field>
+        </fieldset>
+    </fields>
+</form>

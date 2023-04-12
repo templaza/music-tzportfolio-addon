@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="tz_portfolio_plus-plugin" group="content" method="upgrade">
+    <name>plg_content_music</name>
+    <author>DuongTVTemPlaza</author>
+    <creationDate>May, 13rd 2016</creationDate>
+    <copyright>Copyright (C) 2011-2019 Open Source Matters. All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <authorEmail>support@templaza.com</authorEmail>
+    <authorUrl>www.tzportfolio.com</authorUrl>
+    <version>1.1.2</version>
+    <description>PLG_CONTENT_MUSIC_XML_DESCRIPTION</description>
+
+    <files>
+        <filename plugin="music">music.php</filename>
+        <filename>controller.php</filename>
+        <filename>index.html</filename>
+        <folder>admin</folder>
+        <folder>controllers</folder>
+        <folder>css</folder>
+        <folder>fonts</folder>
+        <folder>includes</folder>
+        <folder>language</folder>
+        <folder>libraries</folder>
+        <folder>models</folder>
+        <folder>modules</folder>
+        <folder>tmpl</folder>
+        <folder>views</folder>
+    </files>
+
+    <config>
+        <fields name="params" addfieldpath="administrator/components/com_tz_portfolio_plus/models/fields">
+            <!-- Parameters for back-end -->
+            <fieldset name="basic">
+                <field type="text" name="file_size"
+                       default="10"
+                       label="PLG_CONTENT_MUSIC_FILE_SIZE_LABEL"
+                       description="PLG_CONTENT_MUSIC_FILE_SIZE_DESC"/>
+                <field type="text" name="file_type"
+                       default="mp3,ogg,webm,webmv,ogv,m4v"
+                       label="PLG_CONTENT_MUSIC_FILE_TYPES_LABEL"
+                       description="PLG_CONTENT_MUSIC_FILE_TYPES_DESC"/>
+                <field type="text" name="mime_type"
+                       default="audio/ogg,audio/mpeg,video/mp4,video/ogg,video/webm"
+                       label="PLG_CONTENT_MUSIC_LEGAL_MIME_TYPE_LABEL"
+                       description="PLG_CONTENT_MUSIC_LEGAL_MIME_TYPE_DESC"/>
+            </fieldset>
+            <!-- End parameters for back-end -->
+
+            <!-- Parameters for front-end -->
+            <fieldset name="front_end"
+                      label="PLG_CONTENT_MUSIC_FRONT_END_FIELDSET_LABEL"
+                      description="PLG_CONTENT_MUSIC_FRONT_END_CONFIG_SETTINGS_DESC">
+                <field type="radio" name="music_enable_glyphicon"
+                       default="1" class="btn-group"
+                       label="PLG_CONTENT_MUSIC_ENABLE_GLYPHICON_FONT_LABEL">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field type="radio" name="music_auto_play"
+                       class="btn-group"
+                       default="0"
+                       label="PLG_CONTENT_MUSIC_AUTO_PLAY_LABEL">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field type="radio" name="music_show_repeat"
+                       class="btn-group"
+                       default="0"
+                       label="PLG_CONTENT_MUSIC_SHOW_REPEAT_LABEL">
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                <field type="radio" name="music_show_shuffle"
+                       class="btn-group"
+                       default="0"
+                       label="PLG_CONTENT_MUSIC_SHOW_SHUFFLE_LABEL">
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                <field type="radio" name="music_show_fullscreen"
+                       class="btn-group"
+                       default="0"
+                       label="PLG_CONTENT_MUSIC_SHOW_FULL_SCREEN_LABEL">
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                <field type="radio" name="music_show_stop_btn"
+                       class="btn-group"
+                       default="1"
+                       label="PLG_CONTENT_MUSIC_SHOW_FULL_STOP_BUTTON_LABEL">
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                <field type="text" name="music_volume"
+                       default="0.8"
+                       label="PLG_CONTENT_MUSIC_VOLUME_LABEL"
+                       description="PLG_CONTENT_MUSIC_VOLUME_DESC"/>
+                <field type="radio" name="music_show_title"
+                       default="1" class="btn-group"
+                       label="JGLOBAL_SHOW_TITLE_LABEL">
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                <field type="radio" name="music_show_description"
+                       default="1" class="btn-group"
+                       label="PLG_CONTENT_MUSIC_SHOW_DESCRIPTION_LABEL">
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                <field type="list" name="music_order"
+                       default="rdate"
+                       label="PLG_CONTENT_MUSIC_ORDER_LABEL">
+                    <option value="rdate">PLG_CONTENT_MUSIC_RECENT_FIRST</option>
+                    <option value="date">PLG_CONTENT_MUSIC_OLDEST_FIRST</option>
+                    <option value="alpha">PLG_CONTENT_MUSIC_TITLE_ALPHABETICAL</option>
+                    <option value="ralpha">PLG_CONTENT_MUSIC_TITLE_REVERSE_ALPHABETICAL</option>
+                    <option value="order">JFIELD_ORDERING_LABEL</option>
+                </field>
+                <!-- Start article options in category listings -->
+                <field type="spacer" name="spacer_article_category_listing_name"
+                       class="alert alert-warning btn-block"
+                       label="COM_TZ_PORTFOLIO_PLUS_SPACER_ARTICLE_OPTIONS_IN_CATEGORY_LISTINGS"/>
+                <field type="radio" name="music_show_cat_countsong"
+                       default="1" class="btn-group"
+                       label="PLG_CONTENT_MUSIC_SHOW_COUNT_SONG_LABEL">
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                <!-- End article options in category listings -->
+                <field type="spacer" name="spacer_article_listing_name"
+                       class="alert alert-warning btn-block"
+                       label="PLG_CONTENT_MUSIC_OPTION_IN_ARTICLE"/>
+                <field type="radio" name="music_show_article"
+                       default="1" class="btn-group"
+                       label="PLG_CONTENT_MUSIC_SHOW_IN_ARTICLE">
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                <!--<field type="radio" name="music_show_poster"-->
+                       <!--class="btn-group"-->
+                       <!--default="0"-->
+                       <!--label="PLG_CONTENT_MUSIC_SHOW_POSTER_LABEL">-->
+                    <!--<option value="0">JHIDE</option>-->
+                    <!--<option value="1">JSHOW</option>-->
+                <!--</field>-->
+            </fieldset>
+            <!-- End parameters for front-end -->
+
+        </fields>
+    </config>
+</extension>
